@@ -36,9 +36,9 @@ let FormValidator = {
 					case "min":
 						if (input.value.length < rDetails[1]) {
 							return (
-								"Campo tem que ter pelo menos " +
+								"Senha precisa ter pelo menos " +
 								rDetails[1] +
-								" caractes"
+								" caracteres."
 							);
 						}
 						break;
@@ -47,7 +47,7 @@ let FormValidator = {
 							let regex =
 								/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 							if (!regex.test(input.value.toLowerCase())) {
-								return "E-mail digitado não é válido!";
+								return "E-mail digitado não é válido.";
 							}
 						}
 						break;
@@ -65,6 +65,11 @@ let FormValidator = {
 		errorElement.innerHTML = error;
 
 		input.parentElement.insertBefore(errorElement, input.ElementSibling);
+		
+		input.focus();
+        if (input.type === "text" || input.type === "email" || input.type === "password") {
+            input.select();
+        }
 	},
 	clearErrors: () => {
 		let inputs = form.querySelectorAll("input");
